@@ -21,7 +21,7 @@ const connection_url = `mongodb+srv://ayush:ayush5656@cluster0.qtkr1zj.mongodb.n
 mongoose.connect(connection_url, {})
 
 app.get("/", (req, res) => {
-    res.status(200).send("hello world again, how you doing?" )
+    res.status(200).send("hello world, how you doing?" )
 })
 
 const db = mongoose.connection
