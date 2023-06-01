@@ -51,8 +51,8 @@ db.once("open", () => {
 })
 
 
-app.get("/messages/sync", (req, res) => {
-    Messages.find({})
+app.get("/messages/sync", async (req, res) => {
+    await Messages.find()
     .then((data) => {
         res.status(200).send(data)
     })
