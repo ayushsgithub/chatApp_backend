@@ -63,18 +63,33 @@ app.get("/messages/sync",  (req, res) => {
         res.status(500).send(err)
     })
 })
-app.get("/messages/synca",  (req, res) => {
-    let contents = []
+// app.get("/messages/synca",  (req, res) => {
+//     let contents = []
+//     db.collection("messagecontents")
+//     .find()
+//     .forEach(content => contents.push(content))
+//     .then(() => {
+//         res.status(200).json(contents)
+//     })
+//     .catch(() => {
+//         res.status(500).json({error: "couldn't fetch your data dude"})
+//     })
+// })
+app.get("/messages/synca", (req, res) => {
+    let contents = [];
     db.collection("messagecontents")
-    .find()
-    .forEach(content => contents.push(content))
-    .then(() => {
-        res.status(200).json(contents)
-    })
-    .catch(() => {
-        res.status(500).json({error: "couldn't fetch your data dude"})
-    })
-})
+      .find()
+      .toArray()
+      .then((result) => {
+        contents = result;
+        res.status(200).json(contents);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json({ error: "Couldn't fetch your data, dude" });
+      });
+  });
+  
 
 
 app.post("/messages/new", (req, res) => {
