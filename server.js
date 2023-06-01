@@ -54,8 +54,8 @@ db.once("open", () => {
 })
 
 
-app.get("/messages/sync", async (req, res) => {
-    await Messages.find()
+app.get("/messages/sync",  (req, res) => {
+    Messages.find({})
     .then((data) => {
         res.status(200).send(data)
     })
@@ -63,6 +63,19 @@ app.get("/messages/sync", async (req, res) => {
         res.status(500).send(err)
     })
 })
+app.get("/messages/synca",  (req, res) => {
+    let contents = []
+    db.collection("messagecontents")
+    .find()
+    .forEach(content => contents.push(content))
+    .then(() => {
+        res.status(200).json(contents)
+    })
+    .catch(() => {
+        res.status(500).json({error: "couldn't fetch your data dude"})
+    })
+})
+
 
 app.post("/messages/new", (req, res) => {
     const dbMessage = req.body
