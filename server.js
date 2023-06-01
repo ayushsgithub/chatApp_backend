@@ -3,8 +3,10 @@ import mongoose from "mongoose"
 import Messages from "./dbMessages.js"
 import Pusher from "pusher"
 import cors from "cors"
+import 'dotenv/config'
+
 const app = express()
-const port = process.env.PORT || 9000
+const port = process.env.PORT
 const pusher = new Pusher({
   appId: "1609032",
   key: "b8255243c6e1dc4858f6", 
@@ -16,7 +18,8 @@ const pusher = new Pusher({
 app.use(express.json())
 app.use(cors())
 
-const connection_url = `mongodb+srv://ayush:ayush5656@cluster0.qtkr1zj.mongodb.net/whatsappdb?retryWrites=true&w=majority`
+// const connection_url = `mongodb+srv://ayush:ayush5656@cluster0.qtkr1zj.mongodb.net/whatsappdb?retryWrites=true&w=majority`
+const connection_url = process.env.MONGO_URL
 
 mongoose.connect(connection_url, {})
 
