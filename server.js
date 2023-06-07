@@ -25,9 +25,6 @@ mongoose.connect(connection_url, {})
 app.get("/", (req, res) => {
     res.status(200).send("hello world, how you doing?" )
 })
-app.get("/messages/test", (req, res) => {
-    res.status(200).send("why mongo not working?" )
-})
 
 const db = mongoose.connection
 db.once("open", () => {
@@ -51,7 +48,6 @@ db.once("open", () => {
         }
     })
 })
-
 
 app.get("/messages/sync",  (req, res) => {
     Messages.find({})
