@@ -49,14 +49,22 @@ db.once("open", () => {
     })
 })
 
-app.get("/messages/sync",  (req, res) => {
-    Messages.find({})
-    .then((data) => {
-        res.status(200).send(data)
-    })
-        .catch((err) => {
-        res.status(500).send(err)
-    })
+app.get("/messages/sync", async (req, res) => {
+
+    try {
+        const mData = await Messages.find();
+        res.status(200).json({ success: true, data: mData });
+      } catch (err) {
+        res.status(500).json({ success: false, message: 'Fetching posts failed, please try again' });
+      }
+
+    // Messages.find({})
+    // .then((data) => {
+    //     res.status(200).send(data)
+    // })
+    //     .catch((err) => {
+    //     res.status(500).send(err)
+    // })
 })
 
 app.post("/messages/new", (req, res) => {
