@@ -18,7 +18,6 @@ const pusher = new Pusher({
 app.use(express.json())
 app.use(cors())
 
-// const connection_url = `mongodb+srv://ayush:ayush5656@cluster0.qtkr1zj.mongodb.net/whatsappdb?retryWrites=true&w=majority`
 const connection_url = process.env.MONGO_URL
 
 mongoose.connect(connection_url, {})
