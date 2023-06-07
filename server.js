@@ -52,7 +52,7 @@ db.once("open", () => {
 app.get("/messages/sync", async (req, res) => {
 
     try {
-        const mData = await Messages.find();
+        const mData = await Messages.find({});
         res.status(200).send(mData);
       } catch (err) {
         res.status(500).json({ success: false, message: 'Fetching posts failed, please try again' });
